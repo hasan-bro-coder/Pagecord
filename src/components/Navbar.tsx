@@ -12,7 +12,7 @@ export default function Navbar() {
   let router = useRouter();
   return (
     <nav className="fixed top-0 w-full z-10 border-b border-white/10 bg-black/50 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="mx-auto px-4 h-16 flex items-center justify-between">
         <div className="text-xl font-bold tracking-tighter text-white">
           <Link href="/">Pagecord</Link>
         </div>
