@@ -271,6 +271,7 @@ export function subscribeToMessages(
     messagesQuery,
     (snapshot: QuerySnapshot<DocumentData>) => {
       const messages = snapshot.docs.map((doc) => ({
+        id:doc.id,
         ...doc.data(),
       })) as MessageData[];
       
@@ -395,12 +396,6 @@ export async function uploadToCloudinary(
     throw new Error("Cloudinary cloud name is not configured");
   }
 
-  // Validate file size (10MB limit)
-  const maxSize = 10 * 1024 * 1024; // 10MB
-  if (file.size > maxSize) {
-    throw new Error("File size exceeds 10MB limit");
-  }
-
   // Validate file type
   const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp", "video/mp4"];
   if (!validTypes.includes(file.type)) {
@@ -428,7 +423,7 @@ export async function uploadToCloudinary(
     const data = await response.json();
 
     return {
-      url: data.secure_url || data.url,
+      url: (data.secure_url || data.url).replace("/upload/", "/upload/w_800/q_auto/f_auto/"),
       type: data.resource_type,
       publicId: data.public_id,
     };

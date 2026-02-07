@@ -327,7 +327,7 @@ export default function ChatInterface() {
       const isCurrentUserMessage = currentUser?.username === message.senderName;
 
       previousSenderName = message.senderName;
-
+      console.log(message);
       return (
         <MessageItem
           key={message.id}
@@ -515,7 +515,7 @@ function MessageItem({
         >
           <Pin className="w-4 h-4" />
         </Button>
-        <Button
+        {isCurrentUserMessage && <Button
           variant="ghost"
           size="icon"
           className="h-8 w-8 text-zinc-400 hover:text-zinc-200"
@@ -523,7 +523,7 @@ function MessageItem({
           aria-label="Edit message"
         >
           <Pencil className="w-4 h-4" />
-        </Button>
+        </Button>}
         <Button
           variant="ghost"
           size="icon"
